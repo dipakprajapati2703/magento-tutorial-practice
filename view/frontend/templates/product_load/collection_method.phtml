@@ -1,0 +1,18 @@
+<?php
+/** @var \Vendor\Module\Block\ProductLoad\CollectionMethod $block */
+
+$productId = 4;
+$product = $block->getProductById($productId);
+
+?>
+<div class="using-model get-product">
+        <h2><?= $block->escapeHtml(__('Collection Method')) ?></h2>
+        <?php if ($product): ?>
+            <div class="product-details">
+                <p><strong><?= $block->escapeHtml(__('ID')) ?>:</strong> <?= $block->escapeHtml($product->getId());?></p>
+                <p><strong><?= $block->escapeHtml(__('Product Type')) ?>:</strong> <?= $block->escapeHtml($product->getTypeId());?></p>
+                <p><strong><?= $block->escapeHtml(__('SKU')) ?>:</strong> <?= $block->escapeHtml($product->getSku());?></p>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
