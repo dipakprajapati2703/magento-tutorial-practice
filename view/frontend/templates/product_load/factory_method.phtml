@@ -1,0 +1,17 @@
+<?php
+/** @var \Vendor\Module\Block\ProductLoad\FactoryMethod $block */
+
+$productId = 2;
+$product = $block->getProductById($productId);
+?>
+<div class="using-factory get-product">
+        <h2><?= $block->escapeHtml(__('Factory Pattern Method')) ?></h2>
+        <?php if ($product): ?>
+            <div class="product-details">
+                <p><strong><?= $block->escapeHtml(__('ID')) ?>:</strong> <?= $block->escapeHtml($product->getId());?></p>
+                <p><strong><?= $block->escapeHtml(__('Name')) ?>:</strong> <?= $block->escapeHtml($product->getName());?></p>
+                <p><strong><?= $block->escapeHtml(__('SKU')) ?>:</strong> <?= $block->escapeHtml($product->getSku());?></p>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

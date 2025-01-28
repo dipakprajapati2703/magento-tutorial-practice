@@ -1,0 +1,17 @@
+<?php
+$productId = 4;
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get(\Magento\Catalog\Model\Product::class)->load($productId);
+?>
+<div class="using-object-manager get-product">
+        <h2><?= $block->escapeHtml(__('Object Manager Method')) ?></h2>
+        <?php if ($product): ?>
+            <div class="product-details">
+                <p><strong><?= $block->escapeHtml(__('ID')) ?>:</strong> <?= $block->escapeHtml($product->getId());?></p>
+                <p><strong><?= $block->escapeHtml(__('Name')) ?>:</strong> <?= $block->escapeHtml($product->getName());?></p>
+                <p><strong><?= $block->escapeHtml(__('SKU')) ?>:</strong> <?= $block->escapeHtml($product->getSku());?></p>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="content">
+			<container name="custom.product.container" htmlTag="div" htmlClass="custom-product-container">
+				<!-- Block using Repository Method -->
+				<block name="product.load.using.repository.method"
+					class="Vendor\Module\Block\ProductLoad\RepositoryMethod"
+					template="Vendor_Module::product_load/repository_method.phtml" />
+
+				<!-- Block using Factory Method -->
+				<block name="product.load.using.factory.method"
+					class="Vendor\Module\Block\ProductLoad\FactoryMethod"
+					template="Vendor_Module::product_load/factory_method.phtml"
+					after="product.load.using.repository.method" />
+
+				<!-- Block using Object Manager Method -->
+				<block name="product.load.using.objectmanger.method"
+					class="Magento\Framework\View\Element\Template"
+					template="Vendor_Module::product_load/object_manager_method.phtml"
+					after="-" />
+
+				<!-- Block using Model Method -->
+				<block name="product.load.using.model.method"
+					class="Vendor\Module\Block\ProductLoad\ModelMethod"
+					template="Vendor_Module::product_load/model_method.phtml"
+					after="-" />
+
+				<!-- Block using Resource Model Method -->
+				<block name="product.load.using.resource.model.method"
+					class="Vendor\Module\Block\ProductLoad\ResourceModelMethod"
+					template="Vendor_Module::product_load/resource_model_method.phtml"
+					after="-" />
+
+				<!-- Block using SearchCriteria Method -->
+				<block name="product.load.using.searchcriteria.method"
+					class="Vendor\Module\Block\ProductLoad\SearchCriteriaMethod"
+					template="Vendor_Module::product_load/searchcriteria_method.phtml"
+					after="-" />
+
+				<!-- Block using Collection Method -->
+				<block name="product.load.using.collection.method"
+					class="Vendor\Module\Block\ProductLoad\CollectionMethod"
+					template="Vendor_Module::product_load/collection_method.phtml"
+					after="-" />
+			</container>
+		</referenceContainer>
+	</body>
+</page>
