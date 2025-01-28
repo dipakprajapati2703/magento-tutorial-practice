@@ -13,9 +13,9 @@ use Magento\Framework\Exception\LocalizedException;
 class CollectionMethod extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var CollectionFactory
      */
-    private $productRepository;
+    private $collectionFactory;
 
     /**
      * Constructor
