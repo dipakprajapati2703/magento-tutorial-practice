@@ -1,0 +1,63 @@
+<?php
+/** @var \Vendor\Module\Block\OrderLoad\FetchOrderData $block */
+
+$orderId = 1;
+$orderIncrementId = 000000003;
+
+// Using object manager
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+// $order = $objectManager->create('\Magento\Sales\Model\OrderRepository')->get($orderId);
+
+// Or
+// Using dependency injection
+// $order = $block->getOrderById($orderId);
+
+// Using Factory Method
+$order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
+
+// Using Object Method
+$order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
+
+// Display all details of specific order id.
+echo "<pre>";
+print_r($order->debug());
+
+// Get all information related to order
+$orderData = $block->getOrderInformation($order);
+
+// Get customer data
+$customerData =  $block->getCustomerData($order);
+
+// Get order items
+$orderOrderItems = $block->getOrderItems($order);
+
+// Get order shipping address
+$orderShippingAddressData = $block->getOrderShippingAddress($order);
+
+// Get order billing address
+$orderBillingddressData = $block->getOrderBillingAddress($order);
+
+// Get order shipping information
+$orderShippingData = $block->getOrderShippingInformation($order);
+
+// Get order payment information
+$orderPaymentData = $block->getOrderPaymentInformation($order);
+
+
+// Create an array for order information
+$orderDataArray = $orderData;
+$orderDataArray["customer"] = $customerData;
+$orderDataArray["items"] = $orderOrderItems;
+$orderDataArray["shipping_address"] = $orderShippingAddressData;
+$orderDataArray["billing_address"] = $orderBillingddressData;
+$orderDataArray["shipping"] = $orderShippingData;
+$orderDataArray["payment"] = $orderPaymentData;
+
+// Prepare order data in json format
+$orderJson = json_encode($orderDataArray, JSON_PRETTY_PRINT);
+
+echo "<pre>";
+print_r($orderJson);
+exit();
+?>
+
