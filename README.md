@@ -26,3 +26,7 @@
    - Resource Model Method
    - SearchCriteria Method
    - Collection Method
+
+2. Get Order Information by Order ID
+   - Using Repository Method
+   - Object Manager Method
