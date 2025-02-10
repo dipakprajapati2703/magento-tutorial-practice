@@ -17,6 +17,11 @@ $order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
 
 // Using Object Method
 $order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
+
+// Display all details of specific order id.
+echo "<pre>";
+print_r($order->debug());
+
 // Get all information related to order
 $orderData = $block->getOrderInformation($order);
 
