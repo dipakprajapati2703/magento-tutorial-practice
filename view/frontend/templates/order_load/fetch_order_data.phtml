@@ -12,7 +12,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 // $order = $block->getOrderById($orderId);
 
 $orderIncrementId = 000000002;
-$order = $block->getOrderByIdUsingFactory($orderIncrementId);
+$order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
 // Get all information related to order
 $orderData = $block->getOrderInformation($order);
 

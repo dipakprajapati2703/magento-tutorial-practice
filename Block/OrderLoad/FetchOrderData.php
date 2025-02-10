@@ -58,7 +58,7 @@ class FetchOrderData extends \Magento\Framework\View\Element\Template
      * @return \Magento\Sales\Api\Data\OrderInterface
      * @throws LocalizedException
      */
-    public function getOrderByIdUsingFactory($orderIncrementId)
+    public function getOrderByIncrementIdUsingFactory($orderIncrementId)
     {
         try {
             $order = $this->orderFactory->create()->loadByIncrementId($orderIncrementId);
@@ -68,7 +68,7 @@ class FetchOrderData extends \Magento\Framework\View\Element\Template
             return $order;
         } catch (\Exception $e) {
             throw new LocalizedException(
-                __('Error loading product: %1', $e->getMessage())
+                __('Error loading order: %1', $e->getMessage())
             );
         }
     }
