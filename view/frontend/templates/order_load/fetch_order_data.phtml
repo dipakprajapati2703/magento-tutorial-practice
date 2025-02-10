@@ -2,6 +2,7 @@
 /** @var \Vendor\Module\Block\OrderLoad\FetchOrderData $block */
 
 $orderId = 1;
+$orderIncrementId = 000000003;
 
 // Using object manager
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
@@ -11,7 +12,10 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 // Using dependency injection
 // $order = $block->getOrderById($orderId);
 
-$orderIncrementId = 000000002;
+// Using Factory Method
+$order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
+
+// Using Object Method
 $order = $block->getOrderByIncrementIdUsingFactory($orderIncrementId);
 // Get all information related to order
 $orderData = $block->getOrderInformation($order);

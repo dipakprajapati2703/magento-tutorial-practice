@@ -15,22 +15,35 @@ class FetchOrderData extends \Magento\Framework\View\Element\Template
     private $orderRepository;
 
     /**
+     * @var OrderFactory
+     */
+    private $orderFactory;
+
+    /**
+     * @var OrderInterface
+     */
+    private $order;
+
+    /**
      * Constructor
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
+     * @param \Magento\Sales\Api\Data\OrderInterface $order
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         OrderRepositoryInterface $orderRepository,
         OrderFactory $orderFactory,
+        OrderInterface $order,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->orderRepository = $orderRepository;
         $this->orderFactory = $orderFactory;
+        $this->order = $order;
     }
 
     /**
@@ -62,6 +75,28 @@ class FetchOrderData extends \Magento\Framework\View\Element\Template
     {
         try {
             $order = $this->orderFactory->create()->loadByIncrementId($orderIncrementId);
+            if (!$order->getId()) {
+                throw new LocalizedException(__('Order not found'));
+            }
+            return $order;
+        } catch (\Exception $e) {
+            throw new LocalizedException(
+                __('Error loading order: %1', $e->getMessage())
+            );
+        }
+    }
+
+    /**
+     * Get product by ID using Factory Method
+     *
+     * @param int $orderIncrementId
+     * @return \Magento\Sales\Api\Data\OrderInterface
+     * @throws LocalizedException
+     */
+    public function getOrderByIncrementIdUsingObjectMethod($orderIncrementId)
+    {
+        try {
+            $order = $this->orderinterface->loadByIncrementId($orderIncrementId);
             if (!$order->getId()) {
                 throw new LocalizedException(__('Order not found'));
             }
