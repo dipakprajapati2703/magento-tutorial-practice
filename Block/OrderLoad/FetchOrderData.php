@@ -2,8 +2,10 @@
 namespace Vendor\Module\Block\OrderLoad;
 
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\OrderFactory;
 
 class FetchOrderData extends \Magento\Framework\View\Element\Template
 {
@@ -17,15 +19,18 @@ class FetchOrderData extends \Magento\Framework\View\Element\Template
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+     * @param \Magento\Sales\Model\OrderFactory $orderFactory
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         OrderRepositoryInterface $orderRepository,
+        OrderFactory $orderFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->orderRepository = $orderRepository;
+        $this->orderFactory = $orderFactory;
     }
 
     /**
@@ -42,6 +47,28 @@ class FetchOrderData extends \Magento\Framework\View\Element\Template
         } catch (NoSuchEntityException $e) {
             throw new NoSuchEntityException(
                 __('The order with ID "%1" does not exist.', $orderId)
+            );
+        }
+    }
+
+    /**
+     * Get product by ID using Factory Method
+     *
+     * @param int $orderIncrementId
+     * @return \Magento\Sales\Api\Data\OrderInterface
+     * @throws LocalizedException
+     */
+    public function getOrderByIdUsingFactory($orderIncrementId)
+    {
+        try {
+            $order = $this->orderFactory->create()->loadByIncrementId($orderIncrementId);
+            if (!$order->getId()) {
+                throw new LocalizedException(__('Order not found'));
+            }
+            return $order;
+        } catch (\Exception $e) {
+            throw new LocalizedException(
+                __('Error loading product: %1', $e->getMessage())
             );
         }
     }
